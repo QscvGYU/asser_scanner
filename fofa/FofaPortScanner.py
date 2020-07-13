@@ -38,8 +38,15 @@ class FofaPortScanner(BasePortScanner):
         if len("scan_rst") == 0:
             return rst
         for data_line in scan_rst["results"]:
-            rst_item = {"port": str(data_line[0]).split(":")[1], "protocol": data_line[1], "ssl": data_line[2],
-                        "header": data_line[3], "cpe": data_line[4]}
+            rst_item = {}
+            if len(str(data_line[0]).split(":")) > 1:
+                rst_item["port"] = str(data_line[0]).split(":")[1]
+            else:
+                rst_item["port"] = "80"
+            rst_item["protocol"] = data_line[1]
+            rst_item["ssl"] = data_line[2]
+            rst_item["header"] = data_line[3]
+            rst_item["cpe"]: ""
             rst.append(rst_item)
         return rst
 
