@@ -3,6 +3,7 @@ import json
 
 from core.BasePortScanner import BasePortScanner
 from shodan_ext.ShodanClientExt import ShodanClientExt
+from utils import get_dic_data
 
 
 class ShodanPortScanner(BasePortScanner):
@@ -20,8 +21,12 @@ class ShodanPortScanner(BasePortScanner):
         if len(scan_rst["data"]) == 0:
             return rst
         for data_line in scan_rst["data"]:
-            rst_item = {"port": data_line["port"], "protocol": data_line["transport"],
-                        "ssl": json.dumps(data_line["ssl"]), "header": data_line["data"],
-                        "cpe": json.dumps(data_line["cpe"])}
+            rst_item = {
+                "port": get_dic_data(data_line, ["port"], ""),
+                "protocol": get_dic_data(data_line, "transport", ""),
+                "ssl": json.dumps(get_dic_data(data_line, "ssl", "{}")),
+                "header": get_dic_data(data_line, "data", ""),
+                "cpe": json.dumps(get_dic_data(data_line, "cpe", "{}"))
+            }
             rst.append(rst_item)
         return rst

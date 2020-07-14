@@ -16,3 +16,12 @@ def intToIp(ip_int):
 
     ret = ".".join(ip_str)
     return ret
+
+
+def get_dic_data(dic_data: dict, key: str, default_value):
+    if key in dic_data:
+        return dic_data[key]
+    else:
+        return default_value
+
+
