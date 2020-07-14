@@ -22,11 +22,11 @@ class ShodanPortScanner(BasePortScanner):
             return rst
         for data_line in scan_rst["data"]:
             rst_item = {
-                "port": get_dic_data(data_line, ["port"], ""),
-                "protocol": get_dic_data(data_line, "transport", ""),
-                "ssl": json.dumps(get_dic_data(data_line, "ssl", "{}")),
-                "header": get_dic_data(data_line, "data", ""),
-                "cpe": json.dumps(get_dic_data(data_line, "cpe", "{}"))
+                "port": get_dic_data(scan_rst["data"], ["port"], ""),
+                "protocol": get_dic_data(scan_rst["data"], "transport", ""),
+                "ssl": json.dumps(get_dic_data(scan_rst["data"], "ssl", "{}")),
+                "header": get_dic_data(scan_rst["data"], "data", ""),
+                "cpe": json.dumps(get_dic_data(scan_rst["data"], "cpe", "{}"))
             }
             rst.append(rst_item)
         return rst
