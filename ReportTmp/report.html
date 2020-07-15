@@ -1,0 +1,74 @@
+   <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>自动化测试报告</title>
+            <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+            <h2 style="font-family: Microsoft YaHei">信息搜集</h2>
+            <p class='attribute'><strong>信息搜集结果 : </strong> 子域名共 {$subdomain_count}，IP共 {$ip_address_count}，端口 {port_count}</p>
+            <style type="text/css" media="screen">
+        body  { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px;}
+        td {text-align:center}
+        th {text-align:center}
+        </style>
+        </head>
+        <body>
+            <p>子域名信息</p>
+            <table id='result_table' class="table table-condensed table-bordered table-hover" >
+                <colgroup>
+                    <col align='left' />
+                    <col align='right' />
+                    <col align='right' />
+                    <col align='right' />
+                </colgroup>
+                <tr id='header_row' class="text-center warning " style="font-weight: bold;font-size: 14px;">
+                    <th width="25%" rowspan="2">域名</th>
+                    <th width="25%">IP地址</th>
+                    <th width="25%">端口号</th>
+                    <th width="25%">Service Name</th>
+                </tr> 
+                <tr class='failClass info'>
+                    <td>99</td>
+                    <td>2019-04-17 20:21:27</td>
+                    <td>2019-04-17 20:21:27</td>
+                </tr>
+            </table>
+            <!-- 执行模块 -->
+            <p class='attribute'><strong>开放端口列表 : </strong> </p>    
+            <table id='result_table' class="table table-condensed table-bordered table-hover">
+                <colgroup>
+                    <col align='left' />
+                    <col align='right' />
+                    <col align='right' />
+                    <col align='right' />
+                </colgroup>
+                <tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+                    <th width="20%">80端口</th>
+                    <th width="20%">IP</th>
+                    <th width="20%">协议</th>
+                    <th width="20%"><font color="green">Service Name</font></th>
+                </tr>                           
+                
+                <tr class='failClass warning'>
+                    <td>oppo.com</td>
+                    <td>193.11.22.44</td>
+                    <td>http</td>
+                    <td><font color="green">PHP</font></td>
+                </tr>
+
+                <tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+                    <th width="20%">80端口</th>
+                    <th width="20%">IP</th>
+                    <th width="20%">协议</th>
+                    <th width="20%"><font color="green">Service Name</font></th>
+                </tr>                           
+                
+                <tr class='failClass warning'>
+                    <td>oppo.com</td>
+                    <td>193.11.22.44</td>
+                    <td>http</td>
+                    <td><font color="green">PHP</font></td>
+                </tr>   
+            </table>               
+        </body>
+        </html>
