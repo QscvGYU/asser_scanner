@@ -20,6 +20,8 @@ def main():
             ip_scan_rst = {}
             ip_address_list = sub_domain_ip_map[sub_domain]
             for ip_address in ip_address_list:
+                if ip_address is None:
+                    continue
                 scan_rst_item = scanner.scan(ip_address[4][0])
                 if scan_rst_item:
                     if ip_scan_rst[sub_domain]:
