@@ -20,7 +20,10 @@ class ShodanClientExt(object):
             self.email = config_obj["email"]
 
     def search_host(self, host: str):
-        return self.api_client.host(host)
+        try:
+            return self.api_client.host(host)
+        except shodan.exception.APIError:
+            return "No information available for that IP"
 
     def search(self, query: str):
         return self.api_client.search(query)
