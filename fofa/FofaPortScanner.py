@@ -27,6 +27,7 @@ class FofaPortScanner(BasePortScanner):
             rst.extend(
                 self.deal_rst(field_list, self.fofa_client.get_data(query_str, page=page,
                                           fields=str.join(",", field_list))))
+        return rst
 
     def get_user_info(self):
         return self.fofa_client.get_user_info()

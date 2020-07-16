@@ -12,7 +12,7 @@ class ShodanPortScanner(BasePortScanner):
         self.shodan_client = ShodanClientExt()
 
     def scan(self, ip_address: str):
-        self.deal_rst(self.shodan_client.search_host(ip_address))
+        return self.deal_rst(self.shodan_client.search_host(ip_address))
 
     def deal_rst(self, scan_rst):
         rst = []
