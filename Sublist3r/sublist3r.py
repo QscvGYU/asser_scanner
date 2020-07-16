@@ -301,7 +301,7 @@ class GoogleEnum(enumratorBaseThreaded):
         return links_list
 
     def check_response_errors(self, resp):
-        if (type(resp) is str or type(resp) is unicode) and 'Our systems have detected unusual traffic' in resp:
+        if (type(resp) is str or type(resp) is UnicodeError) and 'Our systems have detected unusual traffic' in resp:
             self.print_(R + "[!] Error: Google probably now is blocking our requests" + W)
             self.print_(R + "[~] Finished now the Google Enumeration ..." + W)
             return False
@@ -476,14 +476,13 @@ class BaiduEnum(enumratorBaseThreaded):
         links = list()
         found_newdomain = False
         subdomain_list = []
-        link_regx = re.compile('<a.*?class="c-showurl".*?>(.*?)</a>')
+        # link_regx = re.compile('<a.*?class="c-showurl".*?>(.*?)</a>')
+        link_regx = re.compile(r"http[s]?://www.baidu.com/link\?url=(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+")
         try:
             links = link_regx.findall(resp)
-            for link in links:
-                link = re.sub('<.*?>|>|<|&nbsp;', '', link)
-                if not link.startswith('http'):
-                    link = "http://" + link
-                subdomain = urlparse.urlparse(link).netloc
+            for link in set(links):
+                link_response = self.session.get(link, headers=self.headers, timeout=self.timeout)
+                subdomain = urlparse.urlparse(link_response.url).netloc
                 if subdomain.endswith(self.domain):
                     subdomain_list.append(subdomain)
                     if subdomain not in self.subdomains and subdomain != self.domain:
