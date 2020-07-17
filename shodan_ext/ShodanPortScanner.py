@@ -12,9 +12,9 @@ class ShodanPortScanner(BasePortScanner):
         self.shodan_client = ShodanClientExt()
 
     def scan(self, ip_address: str):
-        return self.deal_rst(self.shodan_client.search_host(ip_address))
+        return self.deal_rst(self.shodan_client.search_host(ip_address), ip_address)
 
-    def deal_rst(self, scan_rst):
+    def deal_rst(self, scan_rst, ip_address):
         rst = []
         if "data" not in scan_rst:
             return rst
@@ -26,7 +26,9 @@ class ShodanPortScanner(BasePortScanner):
                 "protocol": get_dic_data(data_line, "transport", ""),
                 "ssl": json.dumps(get_dic_data(data_line, "ssl", "{}")),
                 "header": get_dic_data(data_line, "data", ""),
-                "cpe": json.dumps(get_dic_data(data_line, "cpe", "{}"))
+                "cpe": json.dumps(get_dic_data(data_line, "cpe", "{}")),
+                "ip_address": ip_address,
+                "source":  self.name
             }
             rst.append(rst_item)
         return rst

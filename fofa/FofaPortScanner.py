@@ -11,7 +11,7 @@ class FofaPortScanner(BasePortScanner):
         self.name = "fofa"
         self.fofa_client = FofaClient()
 
-    def scan(self,  ip_address: str) -> list:
+    def scan(self, ip_address: str) -> list:
         """【可选参数】字段列表，默认为host，用逗号分隔多个参数，如(fields=ip,title)，
         可选的列表有：
         host title ip domain port country province city country_name header server protocol
@@ -27,13 +27,13 @@ class FofaPortScanner(BasePortScanner):
             # print(f"fcoin : {user_info['fcoin']}")
             rst.extend(
                 self.deal_rst(field_list, self.fofa_client.get_data(query_str, page=page,
-                                          fields=str.join(",", field_list))))
+                                                                    fields=str.join(",", field_list)), ip_address))
         return rst
 
     def get_user_info(self):
         return self.fofa_client.get_user_info()
 
-    def deal_rst(self, field_list, scan_rst) -> list:
+    def deal_rst(self, field_list, scan_rst, ip_address) -> list:
         rst = []
         if "results" not in scan_rst:
             return rst
@@ -53,8 +53,7 @@ class FofaPortScanner(BasePortScanner):
             rst_item["ssl"] = data_line[2]
             rst_item["header"] = data_line[3]
             rst_item["cpe"]: ""
+            rst_item["ip_address"] = ip_address
+            rst_item["source"] = self.name
             rst.append(rst_item)
         return rst
-
-
-
