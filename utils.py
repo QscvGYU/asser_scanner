@@ -25,3 +25,13 @@ def get_dic_data(dic_data: dict, key: str, default_value):
         return default_value
 
 
+def can_convert_int(int_value :str):
+    try:
+        int(int_value)
+        return True
+    except Exception:
+        return False
+
+
+
+

@@ -3,6 +3,7 @@ import json
 
 from core.BasePortScanner import BasePortScanner
 from fofa.FofaClent import FofaClient
+from utils import can_convert_int
 
 
 class FofaPortScanner(BasePortScanner):
@@ -41,7 +42,11 @@ class FofaPortScanner(BasePortScanner):
         for data_line in scan_rst["results"]:
             rst_item = {}
             if len(str(data_line[0]).split(":")) > 1:
-                rst_item["port"] = str(data_line[0]).split(":")[1]
+                port_data = str(data_line[0]).split(":")[-1]
+                if can_convert_int(port_data):
+                    rst_item["port"] = port_data
+                else:
+                    rst_item["port"] = "80"
             else:
                 rst_item["port"] = "80"
             rst_item["protocol"] = data_line[1]
