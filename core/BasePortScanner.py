@@ -8,6 +8,6 @@ class BasePortScanner(object):
     def __init__(self):
         pass
 
-    def san(self, ip_address: str)-> list:
+    def scan(self, ip_address: str)-> list:
         pass
 
