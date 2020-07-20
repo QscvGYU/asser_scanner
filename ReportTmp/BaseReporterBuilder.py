@@ -46,13 +46,21 @@ class BaseReporter(object):
                         sublist_data_dic[sub_domain_data] = [data_line[scanner_name][sub_domain_data]]
         for sub_domain in sublist_data_dic.keys():
             for domain_data in sublist_data_dic[sub_domain]:
-                for td_item in domain_data:
+                if type(domain_data) == list:
+                    for td_item in domain_data:
+                        html_content += f"""<tr class='failClass info'>
+                                <td>{sub_domain}</td>
+                                <td>{td_item['source']}</td>
+                                <td>{td_item['ip_address']}</td>
+                                <td>{td_item['port']}</td>
+                                <td>{td_item['protocol']}</td></tr>"""
+                elif type(domain_data) == dict:
                     html_content += f"""<tr class='failClass info'>
-                            <td>{sub_domain}</td>
-                            <td>{td_item['source']}</td>
-                            <td>{td_item['ip_address']}</td>
-                            <td>{td_item['port']}</td>
-                            <td>{td_item['protocol']}</td></tr>"""
+                                                    <td>{sub_domain}</td>
+                                                    <td>{domain_data['source']}</td>
+                                                    <td>{domain_data['ip_address']}</td>
+                                                    <td>{domain_data['port']}</td>
+                                                    <td>{domain_data['protocol']}</td></tr>"""
         html_content += """</table></body></html>"""
         with open(self.path, 'w', encoding='utf-8') as report_file:
             report_file.write(html_content)
