@@ -5,6 +5,7 @@ from ReportTmp.BaseReporterBuilder import BaseReporter
 from core.BaseIPScanner import BaseIPScanner
 from fofa.FofaPortScanner import FofaPortScanner
 from Sublist3r.sublist3r import interactive as sublist_interactive
+from nmap_ext.NMapPortScaner import NMapPortScannser
 from shodan_ext.ShodanPortScanner import ShodanPortScanner
 
 
@@ -13,7 +14,7 @@ def main():
     ip_scanner = BaseIPScanner()
     sub_domain_ip_map = ip_scanner.get_ips(sub_domain_list)
     scanner_list = [
-        FofaPortScanner, ShodanPortScanner
+        FofaPortScanner, ShodanPortScanner, NMapPortScannser
     ]
     rst = []
     scanners = [scanner() for scanner in scanner_list]

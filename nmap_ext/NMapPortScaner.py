@@ -11,7 +11,6 @@ class NMapPortScannser(BasePortScanner):
         self.name = "nmap"
         self.client = nm = nmap.PortScanner()
         self.config_path = "/nmap_ext"
-        self.config_path = "./"
         self.arg = ""
         self.init_config()
 
